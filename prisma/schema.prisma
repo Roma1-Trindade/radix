@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model SensorData {
+  id          Int      @id @default(autoincrement()) @map("_id")
+  equipmentId String
+  timestamp   DateTime
+  value       Float
+
+  @@unique([equipmentId, timestamp])
+}
+
+model User {
+  id       String     @id @default(cuid())
+  email    String     @unique
+  password String
+  Sessions Sessions[]
+}
+
+model Sessions {
+  id        String   @id @default(cuid())
+  userId    String
+  expiresAt DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

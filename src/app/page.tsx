@@ -1,7 +1,11 @@
-import Image from "next/image";
+import { redirect } from 'next/navigation';
+import { verifySession } from './lib/session';
 
-export default function Home() {
-  return (
-    <h1>Hello world</h1>
-  );
+export default async function App() {
+
+  const {isAuth} = await verifySession()
+  if (!isAuth) {
+    redirect('/login')
+  }
+  redirect('/home')
 }
