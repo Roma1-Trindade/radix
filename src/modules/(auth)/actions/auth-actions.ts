@@ -4,12 +4,10 @@ import {
   loginFormSchema,
   registerFormSchema,
 } from '@/app/lib/definitions';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/app/lib/prisma';
 import * as bcrypt from 'bcryptjs';
 import { redirect } from 'next/navigation';
 import AuthService from '../services/auth-service';
-
-const prisma = new PrismaClient();
 
 export async function createAccount(
   prevState: FormState,

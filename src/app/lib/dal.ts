@@ -21,3 +21,13 @@ export const getUser = cache(async () => {
     return null;
   }
 });
+
+export const getSensorData = cache(async () => {
+  try {
+    const data = await prisma.sensorData.findMany({});
+
+    return data;
+  } catch (error) {
+    return [];
+  }
+});

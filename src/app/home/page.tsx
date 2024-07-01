@@ -1,19 +1,12 @@
-import Link from 'next/link';
-import { getUser } from '../lib/dal';
+import { getSensorData } from '../lib/dal';
+import Layout from './_components/layout';
+import { SensorValuesChart } from './_components/sensor-values-chart';
 
-
-export default async function Home(){
-  const user = await getUser();
-  
+export default async function Home() {
+  const sensorData = await getSensorData();
   return (
-    <div>
-      <h2>Olá {user?.email}</h2>
-      <h1>Home inside app!</h1>
-      <button
-      className="flex w-30 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-      >
-       <Link href="/api/auth/logout">Logout</Link>
-      </button>
-    </div>
+    <Layout>
+      <SensorValuesChart data={sensorData} type="line" />
+    </Layout>
   );
 }

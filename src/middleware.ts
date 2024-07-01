@@ -22,11 +22,18 @@ export async function middleware(req: NextRequest) {
   }
 
   const isAPIRoute = pathname.startsWith('/api');
+  const session = await AuthService.isSessionValid();
+
   if (isAPIRoute) {
     const secret = new TextEncoder().encode(process.env.JWT_SECRET);
     const token = req.headers.get('authorization')?.split(' ')[1];
 
+    if (session) {
+      return NextResponse.next();
+    }
     if (!token) {
+      console.log('No token', session);
+
       return NextResponse.json(
         { error: 'Authentication token missing' },
         { status: 401 }
@@ -42,7 +49,6 @@ export async function middleware(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
   }
-  const session = await AuthService.isSessionValid();
   if (!session) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
