@@ -41,11 +41,8 @@ export async function middleware(req: NextRequest) {
     } catch (err) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-
-    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
   const session = await AuthService.isSessionValid();
-  console.log('Session is valid', session);
   if (!session) {
     return NextResponse.redirect(new URL('/login', req.url));
   }

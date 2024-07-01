@@ -40,8 +40,6 @@ export async function createAccount(
   });
 
   if (existingUser) {
-    console.log('Email already exists', existingUser);
-
     return {
       message: 'Email already exists, please use a different email or login.',
     };
