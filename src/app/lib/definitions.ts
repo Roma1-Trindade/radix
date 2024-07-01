@@ -5,8 +5,6 @@ export const loginFormSchema = z.object({
   password: z.string().min(6).max(255),
 });
 
-export type LoginFormSchema = z.infer<typeof loginFormSchema>;
-
 export const registerFormSchema = z
   .object({
     email: z.string().email(),
@@ -18,19 +16,13 @@ export const registerFormSchema = z
     path: ['confirm'],
   });
 
-export type RegisterFormSchema = z.infer<typeof registerFormSchema>;
-
 export type FormState =
   | {
       errors?: {
         email?: string[];
         password?: string[];
+        confirm?: string[];
       };
       message?: string;
     }
   | undefined;
-
-export type SessionPayload = {
-  userId: string;
-  expiresAt: Date;
-};

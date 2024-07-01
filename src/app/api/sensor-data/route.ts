@@ -1,13 +1,8 @@
 import { prisma } from '@/app/lib/prisma';
-import { authMiddleware } from '@/app/middleware/auth';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const { equipmentId, timestamp, value } = await req.json();
-  const authResponse = await authMiddleware(req);
-  if (authResponse.status !== 200) {
-    return authResponse;
-  }
   try {
     const sensorData = await prisma.sensorData.create({
       data: {
@@ -26,10 +21,6 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  const authResponse = await authMiddleware(req);
-  if (authResponse.status !== 200) {
-    return authResponse;
-  }
   try {
     const sensorData = await prisma.sensorData.findMany();
     return NextResponse.json(sensorData, { status: 200 });

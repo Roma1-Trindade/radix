@@ -1,9 +1,10 @@
+import AuthService from '@/modules/(auth)/services/auth-service';
 import { redirect } from 'next/navigation';
-import { verifySession } from './lib/session';
+
 
 export default async function App() {
 
-  const {isAuth} = await verifySession()
+  const {isAuth} = await AuthService.verifySession()
   if (!isAuth) {
     redirect('/login')
   }

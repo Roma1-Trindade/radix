@@ -1,22 +1,27 @@
 'use server';
-
-import bcrypt from 'bcryptjs';
 import {
   FormState,
-  LoginFormSchema,
-  RegisterFormSchema,
   loginFormSchema,
   registerFormSchema,
-} from './definitions';
-import { prisma } from './prisma';
-import { createSession, deleteSession } from './session';
+} from '@/app/lib/definitions';
+import { PrismaClient } from '@prisma/client';
+import * as bcrypt from 'bcryptjs';
+import { redirect } from 'next/navigation';
+import AuthService from '../services/auth-service';
 
-export async function signUp(formData: RegisterFormSchema): Promise<FormState> {
+const prisma = new PrismaClient();
+
+export async function createAccount(
+  prevState: FormState,
+  formData: FormData
+): Promise<FormState> {
+  'use server';
+
   // 1. Validate form fields
   const validatedFields = registerFormSchema.safeParse({
-    email: formData.email,
-    password: formData.password,
-    confirm: formData.confirm,
+    email: formData.get('email'),
+    password: formData.get('password'),
+    confirm: formData.get('confirm'),
   });
 
   // If any form fields are invalid, return early
@@ -35,6 +40,8 @@ export async function signUp(formData: RegisterFormSchema): Promise<FormState> {
   });
 
   if (existingUser) {
+    console.log('Email already exists', existingUser);
+
     return {
       message: 'Email already exists, please use a different email or login.',
     };
@@ -50,7 +57,6 @@ export async function signUp(formData: RegisterFormSchema): Promise<FormState> {
       email,
     },
   });
-  console.log('data', data);
   const user = data;
 
   if (!user) {
@@ -60,15 +66,23 @@ export async function signUp(formData: RegisterFormSchema): Promise<FormState> {
   }
 
   // 4. Create a session for the user
-  const userId = user.id.toString();
-  await createSession(userId);
+  await AuthService.createSessionToken({
+    userId: user.id,
+    email: user.email,
+  });
+
+  redirect('/home');
 }
 
-export async function login(formData: LoginFormSchema): Promise<any> {
-  // 1. Validate form fields
+export async function login(
+  prevState: FormState,
+  formData: FormData
+): Promise<FormState> {
+  'use server';
+
   const validatedFields = loginFormSchema.safeParse({
-    email: formData.email,
-    password: formData.password,
+    email: formData.get('email'),
+    password: formData.get('password'),
   });
 
   const errorMessage = { message: 'Invalid login credentials.' };
@@ -84,8 +98,6 @@ export async function login(formData: LoginFormSchema): Promise<any> {
   const user = await prisma.user.findFirst({
     where: { email: validatedFields.data.email },
   });
-
-  console.log('User', user);
 
   // If user is not found, return early
   if (!user) {
@@ -103,10 +115,11 @@ export async function login(formData: LoginFormSchema): Promise<any> {
   }
 
   // 4. If login successful, create a session for the user and redirect
-  const userId = user.id.toString();
-  await createSession(userId);
-}
 
-export async function logout() {
-  deleteSession();
+  await AuthService.createSessionToken({
+    userId: user.id,
+    email: user.email,
+  });
+
+  redirect('/home');
 }

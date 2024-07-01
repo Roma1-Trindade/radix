@@ -1,11 +1,11 @@
 import 'server-only';
 
+import AuthService from '@/modules/(auth)/services/auth-service';
 import { cache } from 'react';
 import { prisma } from './prisma';
-import { verifySession } from './session';
 
 export const getUser = cache(async () => {
-  const session = await verifySession();
+  const session = await AuthService.verifySession();
 
   if (!session) return null;
 

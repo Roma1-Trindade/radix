@@ -1,5 +1,4 @@
 import { prisma } from '@/app/lib/prisma';
-import { authMiddleware } from '@/app/middleware/auth';
 
 import csv from 'csv-parser';
 import multer from 'multer';
@@ -83,10 +82,6 @@ const runMiddleware = (req: any, res: any, fn: any) => {
 };
 
 export const POST = async (req: NextRequest) => {
-  const authResponse = await authMiddleware(req);
-  if (authResponse.status !== 200) {
-    return authResponse;
-  }
   if (req.headers.get('content-type')?.startsWith('multipart/form-data')) {
     try {
       const res: any = {}; // Dummy response object
