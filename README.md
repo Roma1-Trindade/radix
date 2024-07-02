@@ -51,7 +51,10 @@ The application will be accessible at `http://localhost:3000`.
 ### Auth token
 
 Add bearer token in the authentication header as such:
+
+```bash
 [Authentication] = bearer <token>
+```
 
 ### Sensor data
 
