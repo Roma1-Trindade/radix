@@ -81,5 +81,9 @@ export default function SensorAveragesChart({
     },
   };
 
-  return <Bar data={chartData} options={options} />;
+  return (
+    <div className="p-2">
+      <Bar data={chartData} options={options} />
+    </div>
+  );
 }

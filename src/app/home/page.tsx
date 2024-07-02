@@ -6,7 +6,7 @@ export default async function Home() {
   const sensorData = await getSensorData();
   return (
     <Layout>
-      <SensorValuesChart data={sensorData} type="line" />
+      <SensorValuesChart data={sensorData} />
     </Layout>
   );
 }
