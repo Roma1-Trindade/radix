@@ -47,6 +47,9 @@ The application will be accessible at `http://localhost:3000`.
 
 - POST: http://localhost:3000/api/auth/login - Sign in with credentials
 - POST: http://localhost:3000/api/auth/register - Sign up with credentials
+  
+![image](https://github.com/Roma1-Trindade/radix/assets/61998570/c4f87f63-7ceb-45ff-82e5-07bd14855ff1)
+
 
 ### Auth token
 
@@ -55,6 +58,9 @@ Add bearer token in the authentication header as such:
 ```bash
 [Authentication] = bearer <token>
 ```
+
+![image](https://github.com/Roma1-Trindade/radix/assets/61998570/91405348-30a3-4e1d-9099-d62d0a33a1d5)
+
 
 ### Sensor data
 
