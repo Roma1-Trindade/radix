@@ -15,13 +15,13 @@ git clone https://github.com/Roma1-Trindade/radix-challenge.git
 cd radix-challenge
 ```
 
-# Make sure you have Node.js version 18 or higher installed:
+### 2. Install Dependencies
+
+#### Make sure you have Node.js version 18 or higher installed:
 
 ```bash
 node -v
 ```
-
-### 2. Install Dependencies
 
 ```bash
 npm install
