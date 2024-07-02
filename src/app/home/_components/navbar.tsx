@@ -6,7 +6,7 @@ const Navbar = () => {
           <div className="flex items-center justify-start rtl:justify-end">
             <a href="/home" className="flex ms-2 md:me-24">
               <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                Equipment Sonar
+                Sensor Data Analysis
               </span>
             </a>
           </div>
