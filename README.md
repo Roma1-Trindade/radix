@@ -36,10 +36,10 @@ yarn dev
 
 The application will be accessible at `http://localhost:3000`.
 
-### Create an account or access with:
+## Create an account or access with:
 
-user: admin@prisma.io
-password: admin@prisma.io
+  user: admin@prisma.io
+  password: admin@prisma.io
 
 ### Upload data with:
 
