@@ -38,7 +38,7 @@ The application will be accessible at `http://localhost:3000`.
 
 ## Create an account or access with
 
-- username: admin@prisma.io
+- email: admin@prisma.io
 - password: admin@prisma.io
 
 ## Endpoints
