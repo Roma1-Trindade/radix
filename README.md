@@ -48,6 +48,11 @@ The application will be accessible at `http://localhost:3000`.
 - POST: http://localhost:3000/api/auth/login - Sign in with credentials
 - POST: http://localhost:3000/api/auth/register - Sign up with credentials
 
+### Auth token
+
+Add bearer token in the authentication header as such:
+[Authentication] = bearer <token>
+
 ### Sensor data
 
 - GET: http://localhost:3000/api/sensor-data - get all sensor data
