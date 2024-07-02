@@ -1,0 +1,12 @@
+config:
+  target: "http://localhost:3000" # URL da sua aplicação Next.js
+  phases:
+    - duration: 60  # duração do teste em segundos
+      arrivalRate: 10000  # número de requisições por segundo
+
+scenarios:
+  - flow:
+      - get:
+          url: "/api/sensor-data"  # endpoint que você deseja testar
+          headers:
+            Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNseTNyMzNrZzAwMDB4dDdkbHA2NzJucDciLCJ1c2VybmFtZSI6InJvbWFvdHJpbmRhZGVAaG90bWFpbC5jb20iLCJpYXQiOjE3MTk5MzgwMzQsImV4cCI6MTcxOTk0MTYzNH0.tR5hJOjxXyYSAAXdeYrlqBNW3JfiA83rQk4sn3Xbh1g" # se necessário

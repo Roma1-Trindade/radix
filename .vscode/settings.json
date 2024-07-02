@@ -1,3 +1,9 @@
 {
-  "cSpell.words": ["jose"]
+  "cSpell.words": ["jose"],
+  "yaml.schemas": {
+    "https://www.artillery.io/schema.json": [
+      "file:///Users/romaotrindade/Projects/radix-challenge/load-test.yml",
+      "file:///Users/romaotrindade/Projects/radix-challenge/load-test/load-test.yml"
+    ]
+  }
 }
