@@ -68,7 +68,7 @@ Add bearer token in the authentication header as such:
 - POST: http://localhost:3000/api/sensor-data - upload json
 - POST: http://localhost:3000/api/sensor-data/upload - upload .csv file
 
-## Load test report with simultaneous requests in a scenario of:
+## Load tests with simultaneous requests in a scenario of:
 
 ### 500:
 
