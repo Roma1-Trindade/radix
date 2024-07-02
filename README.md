@@ -56,7 +56,7 @@ The application will be accessible at `http://localhost:3000`.
 Add bearer token in the authentication header as such:
 
 ```bash
-[Authentication] = bearer <token>
+[Authentication] = Bearer <token>
 ```
 
 ![image](https://github.com/Roma1-Trindade/radix/assets/61998570/91405348-30a3-4e1d-9099-d62d0a33a1d5)
