@@ -1,5 +1,9 @@
 'use client';
-import { SensorData, calculateAverages } from '@/app/lib/sensorUtils';
+import {
+  SensorData,
+  calculateAverages,
+  getRandomColor,
+} from '@/app/lib/sensorUtils';
 import {
   BarElement,
   CategoryScale,
@@ -51,14 +55,14 @@ export default function SensorAveragesChart({
   );
 
   const labels = periods.map(periodToLabel);
-
   const datasets = Object.keys(averages).map((equipmentId, index) => {
+    const color = getRandomColor();
     const equipmentData = averages[equipmentId];
     return {
       label: `Equipment ${equipmentId}`,
       data: periods.map((period) => equipmentData[period] || 0),
-      backgroundColor: `rgba(${75 + index * 20}, 192, 192, 0.6)`,
-      borderColor: `rgba(${75 + index * 20}, 192, 192, 1)`,
+      borderColor: `rgba(${color}, 1)`,
+      backgroundColor: `rgba(${color}, 0.2)`,
       borderWidth: 1,
     };
   });
