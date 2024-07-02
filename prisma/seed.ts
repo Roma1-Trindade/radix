@@ -1,24 +1,21 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
-import csv from 'csv-parser';
-import path from 'path';
-import { Readable } from 'stream';
 
-interface SensorDataRecord {
-  equipmentId: string;
-  timestamp: string;
-  value: string;
-}
+import csvParser from 'csv-parser';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 interface SensorData {
   equipmentId: string;
-  timestamp: string;
+  timestamp: Date;
   value: number;
 }
 
 const prisma = new PrismaClient();
 
 async function main() {
+  const sensorData: SensorData[] = [];
   const hashedPassword = await bcrypt.hash('admin@prisma.io', 10);
   await prisma.user.upsert({
     where: { email: 'admin@prisma.io' },
@@ -29,30 +26,39 @@ async function main() {
     },
   });
 
-  const filePath = path.resolve('../prisma', 'sensorData.csv');
-  console.log('filePath: ', filePath);
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
 
-  const buffer = Buffer.from(filePath);
+  const csvFilePath = path.join(__dirname, 'data', 'sensor-data.csv');
+  // Read CSV file and parse data
+  fs.createReadStream(csvFilePath)
+    .pipe(csvParser())
+    .on('data', (row) => {
+      sensorData.push({
+        equipmentId: row.equipmentId,
+        timestamp: new Date(row.timestamp),
+        value: parseFloat(row.value),
+      });
+    })
+    .on('end', async () => {
+      console.log('CSV file successfully processed');
 
-  const parseCSV = (fileBuffer: Buffer): Promise<SensorDataRecord[]> => {
-    return new Promise((resolve, reject) => {
-      const results: SensorDataRecord[] = [];
-      const stream = Readable.from(fileBuffer.toString());
+      // Insert data into the database
+      for (const data of sensorData) {
+        await prisma.sensorData.create({
+          data: {
+            equipmentId: data.equipmentId,
+            timestamp: data.timestamp,
+            value: data.value,
+          },
+        });
+      }
 
-      stream
-        .pipe(csv())
-        .on('data', (data) => results.push(data as SensorDataRecord))
-        .on('end', () => resolve(results))
-        .on('error', (error) => reject(error));
+      console.log('Data successfully inserted into the database');
+
+      // Disconnect Prisma Client
+      await prisma.$disconnect();
     });
-  };
-  const response: SensorDataRecord[] = await parseCSV(buffer);
-  const sensorDataParsed: SensorData[] = response.map((record) => ({
-    equipmentId: record.equipmentId,
-    timestamp: record.timestamp,
-    value: parseFloat(record.value),
-  }));
-  await prisma.sensorData.createMany({ data: sensorDataParsed });
 }
 main()
   .then(async () => {
