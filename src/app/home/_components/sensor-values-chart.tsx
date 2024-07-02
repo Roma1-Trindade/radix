@@ -93,7 +93,12 @@ function Chart({ data, type }: SensorValuesChartProps) {
     });
   }, [data]);
 
+  const labels = Array.from(
+    new Set(data.map((entry) => formatTimestamp(new Date(entry.timestamp))))
+  ).sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+
   const chartData = {
+    labels,
     datasets,
   };
 
