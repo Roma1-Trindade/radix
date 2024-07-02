@@ -2,6 +2,9 @@
 
 ## Overview
 
+![image](https://github.com/Roma1-Trindade/radix/assets/61998570/e77484ca-642b-4922-a8af-8fd6d139852a)
+
+
 This project is a web application built using **Next.js** for the frontend, **Prisma** for database management, and **PostgreSQL** hosted on **AWS** for the database. The project also integrates **Chart.js** and **react-chartjs-2** for data visualization. This README provides detailed instructions on setting up the development environment, configuring the database, and deploying the application.
 
 ## Setup
