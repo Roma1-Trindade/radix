@@ -36,22 +36,23 @@ yarn dev
 
 The application will be accessible at `http://localhost:3000`.
 
-## Create an account or access with:
+## Create an account or access with
 
-  user: admin@prisma.io
-  password: admin@prisma.io
+- user: admin@prisma.io
+- password: admin@prisma.io
 
-### Upload data with:
+## Endpoints
 
-# Auth endpoint
+### Auth 
 
-POST: http://localhost:3000/api/auth/login - Sign in with credentials
-POST: http://localhost:3000/api/auth/register - Sign up with credentials
+- POST: http://localhost:3000/api/auth/login - Sign in with credentials
+- POST: http://localhost:3000/api/auth/register - Sign up with credentials
 
-# Sensor data endpoint
+### Sensor data
 
-GET: http://localhost:3000/api/sensor-data - get sensor data json
-POST: http://localhost:3000/api/sensor-data - upload json
-POST: http://localhost:3000/api/sensor-data/upload - upload .csv file
+- GET: http://localhost:3000/api/sensor-data - get all sensor data
 
-### Upload data with csv
+### Upload data
+
+- POST: http://localhost:3000/api/sensor-data - upload json
+- POST: http://localhost:3000/api/sensor-data/upload - upload .csv file
