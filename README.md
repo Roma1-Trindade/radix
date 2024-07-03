@@ -109,3 +109,32 @@ cd load-test
 results-10000.html #HTML file
 results-10000.json #JSON file
 ```
+
+## Future Improvements
+
+To enhance the functionality and usability of our application, the following improvements are suggested:
+
+1. **Improve Data Packet Format**:
+
+   - **Add `sensorId`**: Modify the data packet format to include a `sensorId`. This will allow multiple sensors to be associated with a single piece of equipment, providing more detailed and organized data tracking.
+
+2. **Third-Party Authentication**:
+
+   - **Integrate Authentication Services**: Implement authentication using third-party services such as Google, Azure, etc. This will enhance security and provide a seamless login experience for users.
+
+3. **Multi-Select Graph Options**:
+
+   - **Add Multi-Select Dropdown for Graphs**: Introduce a multi-select dropdown in the graphing section. This feature will enable users to choose which sensors' data should be displayed on the graphs, offering more customized and relevant visualizations.
+
+4. **File Upload Interface**:
+
+   - **Add File Upload Feature**: Provide an interface for users to upload files directly through the application. This will facilitate the import of data or configuration files and improve user interaction with the app.
+
+5. **Mobile Application**:
+
+   - **Develop Mobile App**: Create a mobile version of the application. A dedicated mobile app will allow users to access real-time data and interact with the system on the go, enhancing accessibility and convenience.
+
+6. **Real-Time Data Handling**:
+   - **Use WebSockets or Kafka**: Since the application relies on real-time data, transitioning to WebSockets or Kafka would be more efficient than constantly calling an endpoint. These technologies provide better performance and scalability for handling real-time data streams.
+
+By addressing these improvements, we can significantly enhance the application's performance, user experience, and overall functionality.
