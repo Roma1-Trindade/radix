@@ -112,7 +112,7 @@ results-10000.json #JSON file
 
 ## Future Improvements
 
-To enhance the functionality and usability of our application, the following improvements are suggested:
+To enhance the functionality and usability of my application, the following improvements are suggested:
 
 1. **Improve Data Packet Format**:
 
